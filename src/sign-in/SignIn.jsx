@@ -15,7 +15,6 @@ import { styled } from '@mui/material/styles';
 import ForgotPassword from './components/ForgotPassword.jsx';
 import AppTheme from '../shared-theme/AppTheme.jsx';
 import ColorModeSelect from '../shared-theme/ColorModeSelect.jsx';
-import { SitemarkIcon } from './components/CustomIcons.jsx';
 import { useNavigate } from 'react-router-dom'; // <-- import useNavigate
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -93,7 +92,6 @@ export default function SignIn(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateInputs()) {
-      // ถ้า validation ผ่าน ให้ไปหน้า Booking
       navigate('/booking');
     }
   };
@@ -104,17 +102,34 @@ export default function SignIn(props) {
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
         <Card variant="outlined">
-          <SitemarkIcon />
+ 
+  
+  <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+  <img
+    src="src/assets/MeetPointLogo.png"        // <-- เปลี่ยนเป็น path ของภาพคุณ
+    alt="Logo"
+    style={{
+      marginLeft: 20,
+      width: 300,          // <-- ปรับความกว้าง
+      height: 200,         // <-- ปรับความสูง
+      objectFit: 'contain' // รักษาสัดส่วนภาพ
+    }}
+  />
+</Box>
           <Typography
             component="h1"
             variant="h4"
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', 
+              textAlign: 'center', // <-- เพิ่มตรงนี้
+              mb: 2,               // <-- เพิ่ม margin-bottom ถ้าต้องการเว้นระยะจากฟอร์ม
+            }}
+            
           >
             Sign in
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit} // <-- ใช้ handleSubmit
+            onSubmit={handleSubmit}
             noValidate
             sx={{
               display: 'flex',
@@ -157,11 +172,7 @@ export default function SignIn(props) {
               label="Remember me"
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-            >
+            <Button type="submit" fullWidth variant="contained">
               Sign in
             </Button>
             <Link
